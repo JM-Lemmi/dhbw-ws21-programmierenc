@@ -2,8 +2,8 @@
  * TINF21CS1, Programmieraufgabe
  * 1. Semester
  * 
- * Meine Matrikelnummer: 
- * Mein Name:
+ * Meine Matrikelnummer: 8424462
+ * Mein Name: Julian Lemmerich
  *
  */
 // System-Header-Dateien
@@ -12,28 +12,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Aufgabe 1.1
-// Eigene Datentypen
-#define KURS_LEN 10
-
-/**
- * Datentyp fuer die Namen.
- */
-struct namens_typ {
-	char *vorname_ptr;
-	char *nachname_ptr;
-};
-
-/**
- * Datentyp fuer die Studenten.
- */
-struct studenten_typ {
-	int matrikel_nr;
-	struct namens_typ name;
-	char kurs[KURS_LEN];
-};
-
 // Eigene Header-Dateien
+#include "datentypen.h"
 
 // Prototypen
 void drucke_studenten_lang_by_val(struct studenten_typ student);
