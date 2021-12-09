@@ -3,8 +3,8 @@
  * Goll S.490 (7.Aufl.).
  * 1. Semester
  * 
- * Meine Matrikelnummer: 
- * Mein Name:
+ * Meine Matrikelnummer: 8424462
+ * Mein Name: Julian Lemmerich
  *
  */
 // Standard-Header
@@ -51,8 +51,7 @@ int main(int argc, char*argv[])
 /**
  * Wrapper-Funktion von Goll.
  */
-void quickSort (int feld[], int n)
-{
+void quickSort (int feld[], int n) {
 	zerlege (feld, 0, n-1);
 } // quickSort
 
@@ -60,8 +59,7 @@ void quickSort (int feld[], int n)
 /**
  * Rekursive Funktion von Goll.
  */
-void zerlege(int teil_feld [], int startLinks, int startRechts)
-{
+void zerlege(int teil_feld [], int startLinks, int startRechts) {
 	int i;
 	int laufLinks = startLinks;
 	int laufRechts = startRechts;
@@ -101,3 +99,13 @@ void zerlege(int teil_feld [], int startLinks, int startRechts)
 		zerlege(teil_feld, laufLinks, startRechts);
 } // zerlege
 
+/*
+* Vergleiche zwei Ganzzahlen, dass sich eine aufsteigende Sortierung gibt
+* Input: zwei int
+* Returns: 
+*	<0 : one ist kleiner als two
+ *	0 : beide int gleich
+ *	>0 : two ist kleiner als one
+*/
+// Aufgabe 2.2
+vgl_fkt_int_aufsteigend(int one, int two) {return one - two;}
