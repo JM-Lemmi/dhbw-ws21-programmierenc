@@ -177,6 +177,15 @@ int main(int argc, char*argv[])
 		}
 	}
 
+	// Aufgabe 1.12
+	for (size_t i = 0; i < studenten_feld_n; i++) {
+		struct studenten_typ *student = studenten_feld_2ptr[i];
+		free(student->name.nachname_ptr);
+		free(student->name.vorname_ptr);
+		free(student);
+	}
+	printf("Heap-Sepicher freigegeben\n");
+
 	return EXIT_SUCCESS;
 } // main
 
