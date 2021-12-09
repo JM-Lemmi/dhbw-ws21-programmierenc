@@ -95,12 +95,21 @@ int main(int argc, char*argv[])
 		// Studenten-Variable mit 0 fuellen, damit keine
 		//  Warnung erscheint, auch wenn Sie die Aufgabe 1.4
 		//  noch nicht bearbeitet haben
-		memset(&student, 0, sizeof(student));
+		// memset(&student, 0, sizeof(student));
 
 		// student initialisieren
-		//    ... Ihr Quelltext!!! ...
+		student.name.nachname_ptr = "Meier";
+		student.name.vorname_ptr = "Eva";
+		strcpy(&student.kurs, "TINF21CS1");
+		
 		// bsearch() aufrufen
-		//    ... Ihr Quelltext!!! ...
+		ergebnis_ptr = bsearch(
+			&student,
+			studenten_feld,
+			studenten_feld_n,
+			sizeof(studenten_feld[0]),
+			vgl_fkt_kurs_nachname_vorname
+		);
 		// Suchergebnis auswerten
 		// Aufgabe 1.5
 		if(ergebnis_ptr != NULL)
