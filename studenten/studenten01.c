@@ -56,18 +56,15 @@ int main(int argc, char*argv[])
 	// Laufvariable
 	size_t i;
 
+	// Aufgabe 1.7
 	printf("Das urspruengliche Feld mit den Studenten (kurze Ausgabe):\n");
-	// Aufgabe 1.7 (1/2)
-	if(1)
-	{
+	if(0) {
 		for(i = 0; i < studenten_feld_n; i++)
 			drucke_studenten_kurz_by_val(studenten_feld[i]);
 		printf("\n");
 	}
-	else
-	{
-		// Aufgabe 1.7 (1/2)
-		// ... studenten_feld_ausgeben(...);
+	else {
+		studenten_feld_ausgeben(&studenten_feld, studenten_feld_n, &drucke_studenten_kurz_by_val);
 	}
 	
 	printf("Sortieren des Feldes nach dem Kurs, dem Nachnamen und dem Vornamen ...\n");
@@ -75,8 +72,7 @@ int main(int argc, char*argv[])
 		vgl_fkt_kurs_nachname_vorname);
 
 	printf("Das sortierte Feld mit den Studenten (lange Ausgabe):\n");
-	// Aufgabe 1.7 (2/2)
-	if(1)
+	if(0)
 	{
 		for(i = 0; i < studenten_feld_n; i++)
 			drucke_studenten_lang_by_val(studenten_feld[i]);
@@ -84,8 +80,7 @@ int main(int argc, char*argv[])
 	}
 	else
 	{
-		// Aufgabe 1.7 (2/2)
-		// ... studenten_feld_ausgeben(...);
+		studenten_feld_ausgeben(&studenten_feld, studenten_feld_n, &drucke_studenten_lang_by_val);
 	}
 	
 
@@ -290,12 +285,12 @@ int vgl_fkt_kurs_nachname_vorname(struct studenten_typ *v1_ptr, struct studenten
  */
 // Aufgabe 1.6
 void studenten_feld_ausgeben(
-	struct studenten_typ *studenten_ptr[],
+	struct studenten_typ studenten_feld[],
 	size_t studenten_feld_n,
 	void(*ausgabe_fkt_ptr)(struct studenten_typ student)
 ) {
 	for (size_t i = 0; i < studenten_feld_n; i++) {
-		ausgabe_fkt_ptr(*studenten_ptr[i]);
+		ausgabe_fkt_ptr(studenten_feld[i]);
 	}
 } // studenten_feld_ausgeben
 
