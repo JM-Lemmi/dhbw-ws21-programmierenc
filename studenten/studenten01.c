@@ -22,10 +22,11 @@ int vgl_fkt_kurs_nachname_vorname(struct studenten_typ*v1_ptr, struct studenten_
 struct studenten_typ* kopiere_studenten_auf_heap(struct studenten_typ);
 int vgl_fkt_zeiger_matrikel_nr(const void*v1_ptr, const void*v2_ptr);
 void studenten_feld_ausgeben(
-	struct studenten_typ* studenten_ptr[],
+	struct studenten_typ studenten_feld[],
 	size_t studenten_feld_n,
 	void(*ausgabe_fkt_ptr)(struct studenten_typ student)
 );
+void drucke_studenten_kurz_by_ref(struct student_typ* student_ptr);
 
 
 /**
@@ -125,11 +126,12 @@ int main(int argc, char*argv[])
 		else printf("Die gesuchte Studentin wurde nicht gefunden.\n");
 	}
 	
+	// Aufgabe 1.8 (2/2)
 	printf("Das Feld in Kurzform; Ausgabefunktion erhaelt die Speicheradresse:\n");
-	for(i = 0; i < studenten_feld_n; i++)
-	{
-		// Aufgabe 1.8 (2/2)
-		// ... drucke_studenten_kurz_by_ref(...);
+	for(i = 0; i < studenten_feld_n; i++) {
+		for (i = 0; i < studenten_feld_n; i++)
+			drucke_studenten_kurz_by_ref(&studenten_feld[i]);
+		printf("\n");
 	}
 	printf("\n");
 
@@ -235,10 +237,11 @@ void drucke_studenten_kurz_by_val(struct studenten_typ student)
  *	Keiner!
  */
 // Aufgabe 1.8 (1/2)
-// ... drucke_studenten_kurz_by_ref(... student_ptr)
-// {
-//    ... Ihr Quelltext!!! ...
-// } // drucke_studenten_kurz_by_ref
+void drucke_studenten_kurz_by_ref(struct studenten_typ *student) {
+	printf("%s, %s;  ",
+		student->name.nachname_ptr,
+		student->name.vorname_ptr);
+} // drucke_studenten_kurz_by_ref
 
 
 /**
