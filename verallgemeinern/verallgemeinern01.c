@@ -15,7 +15,7 @@
 void zerlege(int teil_feld[], int startLinks, int startRechts);
 void quickSort(int feld[], int n);
 int vgl_fkt_int_aufsteigend(int one, int two);
-void mein_zerlegen(void* teil_feld[], void* startLinks, void* startRechts);
+void mein_zerlegen(void* teil_feld[], int startLinks, int startRechts);
 
 /**
  * Hauptprogramm
@@ -114,7 +114,7 @@ int vgl_fkt_int_aufsteigend(int one, int two) {return one - two;}
 
 
 // Aufgabe 2.3
-void mein_zerlegen(void* teil_feld[], void* startLinks, void* startRechts) {
+void mein_zerlegen(void* teil_feld[], int startLinks, int startRechts) {
 	int i;
 	int laufLinks = startLinks;
 	int laufRechts = startRechts;
@@ -152,4 +152,10 @@ void mein_zerlegen(void* teil_feld[], void* startLinks, void* startRechts) {
 		zerlege(teil_feld, startLinks, laufRechts);
 	if (laufLinks < startRechts)
 		zerlege(teil_feld, laufLinks, startRechts);
+}
+
+
+//Aufgabe 2.4
+void mein_qsort(void* feld[], int n) {
+	mein_zerlegen(feld, 0, n-1);
 }
