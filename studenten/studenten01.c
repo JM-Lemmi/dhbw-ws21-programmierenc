@@ -19,7 +19,7 @@
 void drucke_studenten_lang_by_val(struct studenten_typ student);
 void drucke_studenten_kurz_by_val(struct studenten_typ student);
 int vgl_fkt_kurs_nachname_vorname(
-	const void*v1_ptr, const void*v2_ptr);
+	struct studenten_typ*v1_ptr, struct studenten_typ*v2_ptr);
 struct studenten_typ* kopiere_studenten_auf_heap(struct studenten_typ);
 int vgl_fkt_zeiger_matrikel_nr(
 	const void*v1_ptr, const void*v2_ptr);
