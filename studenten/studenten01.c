@@ -248,7 +248,7 @@ int vgl_fkt_kurs_nachname_vorname(struct studenten_typ *v1_ptr, struct studenten
 			// same nachname
 			// no deeper if is needed, because we have to return the value of strcmp anyway
 			return strcmp(v1_ptr->name.vorname_ptr, v2_ptr->name.vorname_ptr);
-		} else return strcmp(v1_ptr->name.nachname_ptr, *v2_ptr->name.nachname_ptr);
+		} else return strcmp(v1_ptr->name.nachname_ptr, v2_ptr->name.nachname_ptr);
 	} else return strcmp(v1_ptr->kurs, v2_ptr->kurs);
 } // vgl_fkt_kurs_nachname_vorname
 
