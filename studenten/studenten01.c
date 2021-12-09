@@ -51,7 +51,8 @@ int main(int argc, char*argv[])
 	// Anzahl der Beispieldatensaetze in "studenten_feld"
 	size_t studenten_feld_n = sizeof(studenten_feld) / sizeof(studenten_feld[0]);
 	// Zeiger fuer die Indizierung mit 1..n
-	struct studenten_typ *studenten_feld_1_bis_n_ptr = NULL;
+	// pointer für [0] auf [-1], damit [1] = [0]
+	struct studenten_typ* studenten_feld_1_bis_n_ptr = &(studenten_feld[-1]);
 	// Zeigerfeld, das auf die im Heap liegenden Studenten-Objekte verweist
 	struct studenten_typ **studenten_feld_2ptr = NULL;
 	// Laufvariable
@@ -137,10 +138,9 @@ int main(int argc, char*argv[])
 
 	// Aufgabe 1.9
 	printf("Das Feld mit der Indizierung 1..n durchlaufen:\n");
-	// studenten_feld_1_bis_n_ptr ....
 	for(i = 1; i <= studenten_feld_n; i++)
 	{
-		// drucke_studenten_kurz_by_val(studenten_feld_1_bis_n_ptr[i]);
+		drucke_studenten_kurz_by_val(studenten_feld_1_bis_n_ptr[i]);
 	}
 	printf("\n");
 
