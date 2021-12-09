@@ -91,6 +91,7 @@ int main(int argc, char*argv[])
 		// Aufgabe 1.4
 		struct studenten_typ student;
 		struct studenten_typ *ergebnis_ptr = NULL;
+		struct studenten_typ *ergebnis2_ptr = NULL;
 
 		// Studenten-Variable mit 0 fuellen, damit keine
 		//  Warnung erscheint, auch wenn Sie die Aufgabe 1.4
@@ -112,11 +113,18 @@ int main(int argc, char*argv[])
 		);
 		// Suchergebnis auswerten
 		// Aufgabe 1.5
-		if(ergebnis_ptr != NULL)
-			printf("Die Studentin gibt es; Matrikelnummer = %d\n",
-				ergebnis_ptr->matrikel_nr);
-		else
-			printf("Die gesuchte Studentin wurde nicht gefunden.\n");
+		if (ergebnis_ptr != NULL) {
+			printf("Die Studentin gibt es; Matrikelnummer = %d\n", ergebnis_ptr->matrikel_nr);
+			do {
+				ergebnis2_ptr = ergebnis_ptr + 1;
+				if (vgl_fkt_kurs_nachname_vorname(ergebnis_ptr, ergebnis2_ptr) == 0) {
+					printf("Die Studentin gibt es; Matrikelnummer = %d\n", ergebnis2_ptr->matrikel_nr);
+				}
+				else break;
+				ergebnis_ptr = ergebnis2_ptr; ergebnis2_ptr = NULL;
+			} while (1);
+		}
+		else printf("Die gesuchte Studentin wurde nicht gefunden.\n");
 	}
 	
 	printf("Das Feld in Kurzform; Ausgabefunktion erhaelt die Speicheradresse:\n");
