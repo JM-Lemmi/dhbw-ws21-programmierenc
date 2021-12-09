@@ -155,13 +155,13 @@ int main(int argc, char*argv[])
 	}
 
 	// Aufgabe 1.10 (2/2)
-	if(0)
+	if(1)
 	{
 		printf("Die Studenten auf den Heap kopieren...\n");
 		for(i = 0; i < studenten_feld_n; i++)
 			studenten_feld_2ptr[i] = kopiere_studenten_auf_heap(studenten_feld[i]);
 
-		printf("Das Feld mit den Zeigern auf die Studenten ausgeben:\n");
+		printf("Das Feld mit den Zeigern auf die Studenten vom Heap ausgeben:\n");
 		for(i = 0; i < studenten_feld_n; i++)
 			drucke_studenten_lang_by_val(*studenten_feld_2ptr[i]);
 
@@ -309,9 +309,18 @@ void studenten_feld_ausgeben(
  * Rueckgabewert:
  *	Adresse des Studenten-Objektes auf dem Heap.
  */
-struct studenten_typ* kopiere_studenten_auf_heap(struct studenten_typ student)
-{
-	return NULL;
+// Aufgabe 1.10 (1/1)
+struct studenten_typ* kopiere_studenten_auf_heap(struct studenten_typ student) {
+	struct studenten_typ* student_heap = (struct studenten_typ*)malloc(sizeof(struct studenten_typ));
+
+	if (student_heap == NULL) {
+		fprintf(stderr, "Heap voll!\nFile: %s\nLine %d\nVersion %s\n%s", __FILE__, __LINE__, __DATE__, __TIME__);
+		exit(EXIT_FAILURE);
+	}
+
+	*student_heap = student;
+
+	return student_heap;
 } // kopiere_studenten_auf_heap
 
 
