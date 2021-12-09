@@ -1,3 +1,14 @@
+/**
+ * TINF21CS1, Programmieraufgabe
+ * 1. Semester
+ *
+ * Meine Matrikelnummer: 8424462
+ * Mein Name: Julian Lemmerich
+ * 
+ * Header-Datei für Datentypendefinition
+ *
+ */
+
 #pragma once
 
 // Aufgabe 1.1

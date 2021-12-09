@@ -18,9 +18,15 @@
     <ClCompile Include="studenten01.c">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="ausgaben.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="datentypen.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="ausgaben.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

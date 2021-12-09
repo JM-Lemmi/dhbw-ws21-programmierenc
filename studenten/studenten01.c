@@ -6,6 +6,7 @@
  * Mein Name: Julian Lemmerich
  *
  */
+
 // System-Header-Dateien
 #define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
@@ -14,10 +15,9 @@
 
 // Eigene Header-Dateien
 #include "datentypen.h"
+#include "ausgaben.h"
 
 // Prototypen
-void drucke_studenten_lang_by_val(struct studenten_typ student);
-void drucke_studenten_kurz_by_val(struct studenten_typ student);
 int vgl_fkt_kurs_nachname_vorname(struct studenten_typ*v1_ptr, struct studenten_typ*v2_ptr);
 struct studenten_typ* kopiere_studenten_auf_heap(struct studenten_typ);
 int vgl_fkt_zeiger_matrikel_nr(struct studenten_typ* v1_ptr, struct studenten_typ* v2_ptr);
@@ -26,7 +26,6 @@ void studenten_feld_ausgeben(
 	size_t studenten_feld_n,
 	void(*ausgabe_fkt_ptr)(struct studenten_typ student)
 );
-void drucke_studenten_kurz_by_ref(struct studenten_typ* student_ptr);
 
 
 /**
@@ -189,67 +188,6 @@ int main(int argc, char*argv[])
 	return EXIT_SUCCESS;
 } // main
 
-
-/**
- * Diese Funktion gibt in 1 Zeile alle Daten
- * eines Studenten aus, der mittels Call-by-value
- * uebergeben wird.
- * Parameter:
- *	student - Vollstaendige Kopie des auszugebenden
- *		Studenten.
- * Rueckgabewert:
- *	Keiner!
- */
-void drucke_studenten_lang_by_val(struct studenten_typ student)
-{
-	// Linksbuendig (Minuszeichen!) spaltenweise formatiert
-	//  ausgeben
-	printf("%5d  %-10s %-10s %-10s\n", 
-		student.matrikel_nr,
-		student.name.vorname_ptr,
-		student.name.nachname_ptr,
-		student.kurs);
-} // drucke_studenten_lang_by_val
-
-
-/**
- * Diese Funktion gibt den Nach- und Vornamen
- * einen Studenten aus, der mittels Call-by-value
- * uebergeben wird.
- * Beispiel fuer das Format: Lang, Olga; 
- * Parameter:
- *	student - Vollstaendige Kopie des auszugebenden
- *		Studenten.
- * Rueckgabewert:
- *	Keiner!
- */
-void drucke_studenten_kurz_by_val(struct studenten_typ student)
-{
-	printf("%s, %s;  ", 
-		student.name.nachname_ptr,
-		student.name.vorname_ptr);
-} // drucke_studenten_kurz_by_val
-
-
-/**
- * Diese Funktion gibt einen Studenten aus,
- * dessen Anfangsadresse uebergeben wird.
- * Das Format der Ausgabe entspricht genau 
- * demjenigen, das die Funktion
- * "drucke_studenten_kurz_by_val()"
- * verwendet; z.B.: Lang, Olga;  
- * Parameter:
- *	student_ptr - Adresse des auszugebenden
- *		Studenten
- * Rueckgabewert:
- *	Keiner!
- */
-// Aufgabe 1.8 (1/2)
-void drucke_studenten_kurz_by_ref(struct studenten_typ *student) {
-	printf("%s, %s;  ",
-		student->name.nachname_ptr,
-		student->name.vorname_ptr);
-} // drucke_studenten_kurz_by_ref
 
 
 /**
