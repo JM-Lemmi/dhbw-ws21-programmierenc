@@ -16,6 +16,7 @@ void zerlege(int teil_feld[], int startLinks, int startRechts);
 void quickSort(int feld[], int n);
 int vgl_fkt_int_aufsteigend(int one, int two);
 void mein_zerlegen(void* teil_feld[], int startLinks, int startRechts);
+void mein_qsort(void* feld[], int n);
 
 /**
  * Hauptprogramm
