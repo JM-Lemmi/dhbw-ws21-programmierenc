@@ -317,7 +317,12 @@ struct studenten_typ* kopiere_studenten_auf_heap(struct studenten_typ student) {
 		exit(EXIT_FAILURE);
 	}
 
-	*student_heap = student;
+	// *student_heap = student; // geht leider nicht, weil dann nur Pointer zu den namen auf den Stack sind. _strcopy ist nötig.
+	student_heap->matrikel_nr = student.matrikel_nr;
+	student_heap->name.nachname_ptr = _strdup(student.name.nachname_ptr);
+	student_heap->name.vorname_ptr = _strdup(student.name.vorname_ptr);
+	strcpy(student_heap->kurs, student.kurs);
+
 
 	return student_heap;
 } // kopiere_studenten_auf_heap
@@ -347,4 +352,3 @@ int vgl_fkt_zeiger_matrikel_nr(
 
 	return v1_ptr_ptr->matrikel_nr - v2_ptr_ptr->matrikel_nr;
 }
-
