@@ -20,7 +20,7 @@ void drucke_studenten_lang_by_val(struct studenten_typ student);
 void drucke_studenten_kurz_by_val(struct studenten_typ student);
 int vgl_fkt_kurs_nachname_vorname(struct studenten_typ*v1_ptr, struct studenten_typ*v2_ptr);
 struct studenten_typ* kopiere_studenten_auf_heap(struct studenten_typ);
-int vgl_fkt_zeiger_matrikel_nr(const void*v1_ptr, const void*v2_ptr);
+int vgl_fkt_zeiger_matrikel_nr(struct studenten_typ* v1_ptr, struct studenten_typ* v2_ptr);
 void studenten_feld_ausgeben(
 	struct studenten_typ studenten_feld[],
 	size_t studenten_feld_n,
@@ -166,11 +166,10 @@ int main(int argc, char*argv[])
 			drucke_studenten_lang_by_val(*studenten_feld_2ptr[i]);
 
 		// Aufgabe 1.11 (2/2)
-		if(0)
+		if(1)
 		{
 			printf("Das Zeigerfeld entsprechend den Matrikelnummern sortieren...\n");
-			qsort(studenten_feld_2ptr, studenten_feld_n, sizeof(*studenten_feld_2ptr),
-				vgl_fkt_zeiger_matrikel_nr);
+			qsort(studenten_feld_2ptr, studenten_feld_n, sizeof(*studenten_feld_2ptr), vgl_fkt_zeiger_matrikel_nr);
 
 			printf("Das sortierte Zeigerfeld ausgeben:\n");
 			for(i = 0; i < studenten_feld_n; i++)
@@ -338,10 +337,14 @@ struct studenten_typ* kopiere_studenten_auf_heap(struct studenten_typ student) {
  *	0 --> beide Studenten gleich.
  *	pos. Wert --> 1. Student nach 2. Student einzusortieren.
  */
-int vgl_fkt_zeiger_matrikel_nr(const void*v1_ptr, const void*v2_ptr)
-{
-	// Aufgabe 1.11 (1/2)
-	//    ... Ihr Quelltext!!! ...
-	return 0;
-} // vgl_fkt_zeiger_matrikel_nr
+ // Aufgabe 1.11 (1/2)
+int vgl_fkt_zeiger_matrikel_nr(
+	struct studenten_typ *v1_ptr,
+	struct studenten_typ *v2_ptr
+) {
+	struct studenten_typ* v1_ptr_ptr = *(struct studenten_typ**)v1_ptr;
+	struct studenten_typ* v2_ptr_ptr = *(struct studenten_typ**)v2_ptr;
+
+	return v1_ptr_ptr->matrikel_nr - v2_ptr_ptr->matrikel_nr;
+}
 
