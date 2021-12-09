@@ -45,7 +45,7 @@ int main(int argc, char*argv[])
 	};
 	// Aufgabe 1.2
 	// Anzahl der Beispieldatensaetze in "studenten_feld"
-	size_t studenten_feld_n = 10;
+	size_t studenten_feld_n = sizeof(studenten_feld) / sizeof(studenten_feld[0]);
 	// Zeiger fuer die Indizierung mit 1..n
 	struct studenten_typ *studenten_feld_1_bis_n_ptr = NULL;
 	// Zeigerfeld, das auf die im Heap liegenden Studenten-Objekte verweist
