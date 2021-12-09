@@ -240,12 +240,16 @@ void drucke_studenten_kurz_by_val(struct studenten_typ student)
  *	0 --> beide Studenten gleich.
  *	pos. Wert --> 1. Student nach 2. Student einzusortieren.
  */
-int vgl_fkt_kurs_nachname_vorname(
-	const void*v1_ptr, const void*v2_ptr)
-{
-	// Aufgabe 1.3
-	//    ... Ihr Quelltext!!! ...
-	return 0;
+// Aufgabe 1.3
+int vgl_fkt_kurs_nachname_vorname(struct studenten_typ *v1_ptr, struct studenten_typ *v2_ptr) {
+	if (strcmp(v1_ptr->kurs, v2_ptr->kurs) == 0) {
+		// same kurs
+		if (strcmp(v1_ptr->name.nachname_ptr, v2_ptr->name.nachname_ptr) == 0) {
+			// same nachname
+			// no deeper if is needed, because we have to return the value of strcmp anyway
+			return strcmp(v1_ptr->name.vorname_ptr, v2_ptr->name.vorname_ptr);
+		} else return strcmp(v1_ptr->name.nachname_ptr, *v2_ptr->name.nachname_ptr);
+	} else return strcmp(v1_ptr->kurs, v2_ptr->kurs);
 } // vgl_fkt_kurs_nachname_vorname
 
 
