@@ -37,7 +37,8 @@ int main(int argc, char*argv[])
 	
 	// Aufsteigend sortieren
 	printf("Das Feld sortieren ...\n");
-	quickSort(feld, feld_n);
+	if (0) quickSort(feld, feld_n);
+	else mein_qsort(feld, feld_n);
 	printf("\n");
 	
 	// Sortiertes Feld ausgeben 
