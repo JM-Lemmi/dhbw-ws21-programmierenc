@@ -21,10 +21,13 @@ void mein_zerlegen(
 	int laufLinks = startLinks;
 	int laufRechts = startRechts;
 	int vergleichselementIndex = (startLinks + startRechts) / 2;
-	void* vergleichselement = (char*)teil_feld + (vergleichselementIndex * size);
 
+	void* vergleichselement = malloc(size);
 	void* zwischen = malloc(size);
-	if (!zwischen) { fprintf(stderr, "Heap voll!"); exit(EXIT_FAILURE); }
+	if (!zwischen || !vergleichselement) { fprintf(stderr, "Heap voll!"); exit(EXIT_FAILURE); }
+
+	// dies ist nötig, da falls das vergleichselement getauscht wird, der ursprüngliche pointer auf etwas anderes zeigen kann und die sortierung fehlschlägt
+	memcpy(vergleichselement, (char*)teil_feld + (vergleichselementIndex * size), size);
 
 	do { /* Schleife, bis laufLinks und laufRechts zusammentreffen */
 
