@@ -15,17 +15,18 @@
 // Prototypen
 void zerlege(int teil_feld[], int startLinks, int startRechts);
 void quickSort(int feld[], int n);
-int vgl_fkt_int_aufsteigend(int one, int two);
-void mein_zerlegen(void* teil_feld[], int startLinks, int startRechts, int(*vgl_fkt_ptr)(void* one, void* two));
-void mein_qsort(void* feld[], int n);
+int vgl_fkt_int_aufsteigend(int* one, int* two);
+void mein_zerlegen(void* teil_feld, int startLinks, int startRechts, int size, int(*vgl_fkt)(void* one, void* two));
+void mein_qsort(void* feld, int nmemb, int size, int(*vgl_fkt)(void* one, void* two));
+int vgl_fkt_double_aufsteigend(double* one, double* two);
 
 /**
  * Hauptprogramm
  */
 int main(int argc, char*argv[])
 {
-	// Feld mit zu sortierenden Ganzzahlen
-	int feld[] = { 7, 3, 8, 6, 9, 1, 2, 4 };
+	// Feld mit zu sortierenden Doubles
+	double feld[8] = { 7.0, 3.0, 8.0, 6.0, 9.0, 1.0, 2.0, 4.0 };
 	// Anzahl der Feldelemente
 	int feld_n = sizeof(feld)/sizeof(feld[0]);
 	// Laufvariable
@@ -34,19 +35,19 @@ int main(int argc, char*argv[])
 	// Zu sortierendes Array ausgeben 
 	printf("Das gegebene, unsortierte Feld:\n");
 	for (index=0; index < feld_n; index++)
-		printf("%i ", feld[index]);
+		printf("%lf ", feld[index]);
 	printf("\n\n");
 	
 	// Aufsteigend sortieren
 	printf("Das Feld sortieren ...\n");
 	if (0) quickSort(feld, feld_n);
-	else mein_qsort(feld, feld_n, sizeof(feld[0]), vgl_fkt_int_aufsteigend);
+	else mein_qsort(feld, feld_n, sizeof(feld[0]), vgl_fkt_double_aufsteigend);
 	printf("\n");
 	
 	// Sortiertes Feld ausgeben 
 	printf("Das sortierte Feld:\n");
 	for(index = 0; index < feld_n; index++)
-		printf("%i ", feld[index]);
+		printf("%lf ", feld[index]);
 	printf("\n");
 
 	return EXIT_SUCCESS;
@@ -105,7 +106,7 @@ void zerlege(int teil_feld [], int startLinks, int startRechts) {
 } // zerlege
 
 /*
-* Vergleiche zwei Ganzzahlen, dass sich eine aufsteigende Sortierung gibt
+* Vergleiche zwei Zahlen (entweder double oder int), dass sich eine aufsteigende Sortierung gibt
 * Input: zwei int
 * Returns: 
 *	<0 : one ist kleiner als two
@@ -114,6 +115,7 @@ void zerlege(int teil_feld [], int startLinks, int startRechts) {
 */
 // Aufgabe 2.2
 int vgl_fkt_int_aufsteigend(int *one, int *two) {return *one - *two;}
+int vgl_fkt_double_aufsteigend(double* one, double* two) { return *one - *two; }
 
 
 void mein_zerlegen(
