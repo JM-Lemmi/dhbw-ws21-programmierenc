@@ -15,7 +15,7 @@
 void zerlege(int teil_feld[], int startLinks, int startRechts);
 void quickSort(int feld[], int n);
 int vgl_fkt_int_aufsteigend(int one, int two);
-void mein_zerlegen(void* teil_feld[], int startLinks, int startRechts);
+void mein_zerlegen(void* teil_feld[], int startLinks, int startRechts, int(*vgl_fkt_ptr)(void* one, void* two));
 void mein_qsort(void* feld[], int n);
 
 /**
@@ -39,7 +39,7 @@ int main(int argc, char*argv[])
 	// Aufsteigend sortieren
 	printf("Das Feld sortieren ...\n");
 	if (0) quickSort(feld, feld_n);
-	else mein_qsort(feld, feld_n);
+	else mein_qsort(feld, feld_n, &vgl_fkt_int_aufsteigend);
 	printf("\n");
 	
 	// Sortiertes Feld ausgeben 
@@ -115,49 +115,52 @@ void zerlege(int teil_feld [], int startLinks, int startRechts) {
 int vgl_fkt_int_aufsteigend(int one, int two) {return one - two;}
 
 
-// Aufgabe 2.3
-void mein_zerlegen(void* teil_feld[], int startLinks, int startRechts) {
+void mein_zerlegen(
+	void* teil_feld[],
+	int startLinks,
+	int startRechts,
+	int(*vgl_fkt_ptr)(void* one, void* two)
+) {
 	int i;
 	int laufLinks = startLinks;
 	int laufRechts = startRechts;
-	int vergleichselementIndex =
-		(startLinks + startRechts) / 2; /*(1)*/
-	int vergleichselement = teil_feld[vergleichselementIndex];
+	int vergleichselementIndex = (startLinks + startRechts) / 2;
+	void* vergleichselement = &teil_feld + vergleichselementIndex; // da ptr+i eigentlich ptr+(i*sizeof(ptr)) ist sollte das so gehen
 
-	do /*(2)*/
-	{ /* Schleife, bis laufLinks und laufRechts zusammentreffen */
+	do { /* Schleife, bis laufLinks und laufRechts zusammentreffen */
+		
+		// wir brauchen *(& hier, da &teil_feld auf die adresse des ersten Elements zeigt, dh in der klammer steht eine adresse. Da wir aber mit dem Wert arbeiten wollen, brauchen wir noch den * davor
+		
 		/* Suche von links groessere Elemente als */
-		/* Vergleichselement (2.1)*/
-		while (teil_feld[laufLinks] < vergleichselement)
+		while (*(&teil_feld + laufLinks) < vergleichselement)
 			laufLinks++;
 		/* Suche von rechts kleinere Elemente als */
-		/* Vergleichselement (2.2)*/
-		while (teil_feld[laufRechts] > vergleichselement)
+		while (*(&teil_feld + laufRechts) > vergleichselement)
 			laufRechts--;
-		if (laufLinks <= laufRechts) /* Vertauschen (2.3)*/
+		if (laufLinks <= laufRechts)
 		{
-			int zwischen = teil_feld[laufLinks];
-			teil_feld[laufLinks] = teil_feld[laufRechts];
-			teil_feld[laufRechts] = zwischen;
+			void* zwischen = *(&teil_feld + laufLinks);
+			*(&teil_feld + laufLinks) = *(&teil_feld + laufRechts);
+			*(&teil_feld + laufRechts) = zwischen;
 			laufLinks++; laufRechts--;
 		}
-	} while (laufLinks <= laufRechts); /*(2.4)*/
+	} while (laufLinks <= laufRechts);
 
-	/* Vorsortiertes Feld ausgeben */
-	for (i = 0; i < startLinks; i++)
-		printf(" ");
-	for (i = startLinks; i <= startRechts; i++)
-		printf("%i ", teil_feld[i]);
-	printf("\n");
+	if (0) { /* Vorsortiertes Feld ausgeben */
+		for (i = 0; i < startLinks; i++) printf(" ");
+		for (i = startLinks; i <= startRechts; i++) printf("%i ", teil_feld[i]);
+		printf("\n");
+	}
+
 	/* Jetzt beide Teilfelder rekursiv gleich behandeln (3)*/
 	if (startLinks < laufRechts)
-		zerlege(teil_feld, startLinks, laufRechts);
+		mein_zerlegen(&teil_feld, startLinks, laufRechts, &vgl_fkt_ptr);
 	if (laufLinks < startRechts)
-		zerlege(teil_feld, laufLinks, startRechts);
+		mein_zerlegen(&teil_feld, laufLinks, startRechts, &vgl_fkt_ptr);
 }
 
 
-//Aufgabe 2.4
-void mein_qsort(void* feld[], int n) {
-	mein_zerlegen(feld, 0, n-1);
+// Aufgabe 2.4
+void mein_qsort(void* feld[], int n, int(*vgl_fkt_ptr)(void* one, void* two)) {
+	mein_zerlegen(&feld, 0, n-1, &vgl_fkt_ptr);
 }
