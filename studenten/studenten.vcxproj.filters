@@ -21,12 +21,18 @@
     <ClCompile Include="ausgaben.c">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="mein_qsort.c">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="datentypen.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="ausgaben.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="mein_qsort.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
   </ItemGroup>

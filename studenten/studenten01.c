@@ -16,6 +16,7 @@
 // Eigene Header-Dateien
 #include "datentypen.h"
 #include "ausgaben.h"
+#include "mein_qsort.h"
 
 // Prototypen
 int vgl_fkt_kurs_nachname_vorname(struct studenten_typ*v1_ptr, struct studenten_typ*v2_ptr);
@@ -69,7 +70,7 @@ int main(int argc, char*argv[])
 	}
 	
 	printf("Sortieren des Feldes nach dem Kurs, dem Nachnamen und dem Vornamen ...\n");
-	qsort(studenten_feld, studenten_feld_n, sizeof(studenten_feld[0]),
+	mein_qsort(studenten_feld, studenten_feld_n, sizeof(studenten_feld[0]),
 		vgl_fkt_kurs_nachname_vorname);
 
 	printf("Das sortierte Feld mit den Studenten (lange Ausgabe):\n");
@@ -168,7 +169,7 @@ int main(int argc, char*argv[])
 		if(1)
 		{
 			printf("Das Zeigerfeld entsprechend den Matrikelnummern sortieren...\n");
-			qsort(studenten_feld_2ptr, studenten_feld_n, sizeof(*studenten_feld_2ptr), vgl_fkt_zeiger_matrikel_nr);
+			mein_qsort(studenten_feld_2ptr, studenten_feld_n, sizeof(*studenten_feld_2ptr), vgl_fkt_zeiger_matrikel_nr);
 
 			printf("Das sortierte Zeigerfeld ausgeben:\n");
 			for(i = 0; i < studenten_feld_n; i++)
