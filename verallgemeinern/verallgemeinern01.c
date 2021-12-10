@@ -119,7 +119,7 @@ void mein_zerlegen(
 	void* teil_feld[],
 	int startLinks,
 	int startRechts,
-	int(*vgl_fkt_ptr)(void* one, void* two)
+	int(*vgl_fkt)(void* one, void* two)
 ) {
 	int i;
 	int laufLinks = startLinks;
@@ -132,10 +132,10 @@ void mein_zerlegen(
 		// wir brauchen *(& hier, da &teil_feld auf die adresse des ersten Elements zeigt, dh in der klammer steht eine adresse. Da wir aber mit dem Wert arbeiten wollen, brauchen wir noch den * davor
 		
 		/* Suche von links groessere Elemente als */
-		while (*(&teil_feld + laufLinks) < vergleichselement)
+		while (vgl_fkt(*(&teil_feld + laufLinks), vergleichselement) < 0)
 			laufLinks++;
 		/* Suche von rechts kleinere Elemente als */
-		while (*(&teil_feld + laufRechts) > vergleichselement)
+		while (vgl_fkt(*(&teil_feld + laufRechts), vergleichselement) > 0)
 			laufRechts--;
 		if (laufLinks <= laufRechts)
 		{
@@ -154,13 +154,13 @@ void mein_zerlegen(
 
 	/* Jetzt beide Teilfelder rekursiv gleich behandeln (3)*/
 	if (startLinks < laufRechts)
-		mein_zerlegen(&teil_feld, startLinks, laufRechts, &vgl_fkt_ptr);
+		mein_zerlegen(&teil_feld, startLinks, laufRechts, &vgl_fkt);
 	if (laufLinks < startRechts)
-		mein_zerlegen(&teil_feld, laufLinks, startRechts, &vgl_fkt_ptr);
+		mein_zerlegen(&teil_feld, laufLinks, startRechts, &vgl_fkt);
 }
 
 
 // Aufgabe 2.4
-void mein_qsort(void* feld[], int n, int(*vgl_fkt_ptr)(void* one, void* two)) {
-	mein_zerlegen(&feld, 0, n-1, &vgl_fkt_ptr);
+void mein_qsort(void* feld[], int n, int(*vgl_fkt)(void* one, void* two)) {
+	mein_zerlegen(&feld, 0, n-1, vgl_fkt);
 }
