@@ -49,7 +49,7 @@ void mein_zerlegen(
 		}
 	} while (laufLinks <= laufRechts);
 
-	free(zwischen);
+	free(zwischen); free(vergleichselement)
 
 	/* Jetzt beide Teilfelder rekursiv gleich behandeln (3)*/
 	if (startLinks < laufRechts)
